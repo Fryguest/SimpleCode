@@ -32,6 +32,12 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'vim-syntastic/syntastic'
 " Vim 集成 Git
 Plug 'tpope/vim-fugitive'
+" 代码提示工具
+Plug 'ycm-core/YouCompleteMe'
+" 文件树
+Plug 'preservim/nerdtree'
+" Vim/Tmux集成
+Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 " 禁止折行
@@ -105,4 +111,31 @@ noremap x "xx
 " 删除不必要的快捷键
 map <C-A> <Nop>
 map <C-X> <Nop>
+
+
+" 菜单自动补全
+set completeopt=menu,menuone,noselect
+
+" YCM相关配置
+let g:ycm_python_interpreter_path = '/usr/local/bin/python3'
+
+nnoremap <F1> :YcmCompleter GoToDeclaration<CR>
+nnoremap <F2> :YcmCompleter GoToDefinition<CR>
+nnoremap <F3> :YcmCompleter GoToReferences<CR>
+
+" 状态栏显示 Syntastic 状态
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" 错误列表行为
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_python_checkers=['flake8']
+let g:syntastic_python_flake8_args='--max-line-length=120 --ignore=E402,E501,E302,E305,W391,E266'
+
+" NERDTree
+nnoremap <F4> :NERDTreeToggle<CR>
 
